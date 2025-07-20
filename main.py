@@ -11,7 +11,8 @@ from typing import List, Tuple
 SEPARATOR_LINE = '-' * 47
 
 def enter_guessed_numbers() -> str:
-    """Vyzve uživatele k zadání čísla a validuje vstup.
+    """
+    Vyzve uživatele k zadání čísla a validuje vstup.
 
     Opakovaně se ptá na vstup, dokud uživatel nezadá platné 4místné číslo.
     Číslo musí obsahovat pouze číslice, nesmí začínat nulou a všechny
@@ -36,7 +37,8 @@ def enter_guessed_numbers() -> str:
     return guessed_numbers
 
 def get_correct_form_of_word(bulls: int, cows: int) -> Tuple[str, str]:
-    """Vrátí správné gramatické tvary slov "bull" a "cow".
+    """
+    Vrátí správné gramatické tvary slov "bull" a "cow".
 
     Args:
         bulls (int): Počet "býků" (správná číslice na správné pozici).
@@ -50,7 +52,8 @@ def get_correct_form_of_word(bulls: int, cows: int) -> Tuple[str, str]:
     return bull_word, cow_word
 
 def generate_numbers_for_guessing() -> List[int]:
-    """Vygeneruje náhodné 4místné tajné číslo pro hádání.
+    """
+    Vygeneruje náhodné 4místné tajné číslo pro hádání.
 
     Číslo je sestaveno z unikátních číslic a nezačíná nulou.
 
@@ -67,7 +70,8 @@ def generate_numbers_for_guessing() -> List[int]:
     return secret_number
 
 def guessing_numbers(numbers_for_guessing: List[int]) -> int:
-    """Spustí hlavní herní smyčku, kde hráč hádá číslo.
+    """
+    Spustí hlavní herní smyčku, kde hráč hádá číslo.
 
     Smyčka běží, dokud hráč neuhodne správné číslo (4 "býky").
     V každém kole vyhodnotí hráčův tip, vypíše počet "býků" a "krav"
@@ -103,7 +107,9 @@ def guessing_numbers(numbers_for_guessing: List[int]) -> int:
     return attempt
 
 def introductory_information() -> None:
-    """Vypíše úvodní uvítací zprávu a instrukce ke hře."""
+    """
+    Vypíše úvodní uvítací zprávu a instrukce ke hře.
+    """
     print('\nHi there!')
     print(SEPARATOR_LINE)
     print("I've generated a random 4 digit number for you.")
@@ -113,7 +119,8 @@ def introductory_information() -> None:
     print(SEPARATOR_LINE)
 
 def greeting(attempt: int) -> None:
-    """Vypíše závěrečnou gratulaci po uhodnutí čísla.
+    """
+    Vypíše závěrečnou gratulaci po uhodnutí čísla.
 
     Args:
         attempt (int): Celkový počet pokusů potřebných k vítězství.
@@ -124,7 +131,8 @@ def greeting(attempt: int) -> None:
     print("That's amazing!\n")
 
 def main():
-    """Hlavní funkce, která řídí celý běh programu.
+    """
+    Hlavní funkce, která řídí celý běh programu.
 
     Postupně volá funkce pro zobrazení úvodu, generování čísla,
     samotnou hru a závěrečnou gratulaci.
