@@ -106,7 +106,20 @@ def display_stats(stats: List[Tuple[int, float]]) -> None:
     print(f"Fastest game: {fastest_game_str}")
     print(f"Average guesses per game: {avg_guesses:.2f}")
     print(f"Average time per game: {avg_duration_str}")
-    print("-----------------------")
+    print(SEPARATOR_LINE)
+
+
+def display_welcome_message():
+    """Prints the initial welcome message for the game."""
+    print("\nWelcome to Bulls and Cows!")
+    print(SEPARATOR_LINE)
+
+
+def display_game_start_message(digits: int):
+    """Prints the message before a new game round starts."""
+    print(f"\nI've generated a random {digits} digit number for you.")
+    print("Let's play a bulls and cows game!")
+    print(SEPARATOR_LINE)
 
 
 # --- Game Class ---
@@ -219,14 +232,6 @@ class Game:
             A tuple containing the total number of attempts and the
             total duration in seconds for the game.
         """
-        print('\nHi there!')
-        print(SEPARATOR_LINE)
-        print(f"I've generated a random {self.digits} digit number for you.")
-        print("Let's play a bulls and cows game!")
-        print(SEPARATOR_LINE)
-        print('Enter a number:')
-        print(SEPARATOR_LINE)
-
         # Use monotonic clock for reliable duration measurement.
         self.start_time = time.monotonic()
 
@@ -301,12 +306,13 @@ def main():
     stats, running game sessions in a loop, and saving stats after
     each game.
     """
-    print("\nWelcome to Bulls and Cows!")
+    display_welcome_message()
 
     stats = load_stats()
     display_stats(stats)
 
     while True:
+        display_game_start_message(DIGIT_COUNT)
         game = Game(digits=DIGIT_COUNT)
         final_attempts, game_duration = game.play()
 
