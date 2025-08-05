@@ -7,19 +7,19 @@ email: josef.nuhlicek@gmail.com
 import random
 from typing import List, Tuple
 
-# Oddělovací čára pro výpis do konzole
+# Separator line for console output
 SEPARATOR_LINE = '-' * 47
 
 def enter_guessed_numbers() -> str:
     """
-    Vyzve uživatele k zadání čísla a validuje vstup.
+    Prompts the user to enter a number and validates the input.
 
-    Opakovaně se ptá na vstup, dokud uživatel nezadá platné 4místné číslo.
-    Číslo musí obsahovat pouze číslice, nesmí začínat nulou a všechny
-    číslice musí být unikátní.
+    Repeatedly asks for input until the user enters a valid 4-digit number.
+    The number must contain only digits, must not start with zero, and all
+    digits must be unique.
 
     Returns:
-        str: Zvalidovaný vstup od uživatele jako řetězec.
+        str: The validated user input as a string.
     """
     is_guessed_number_ok = False
     while not is_guessed_number_ok:
@@ -36,52 +36,59 @@ def enter_guessed_numbers() -> str:
             is_guessed_number_ok = True
     return guessed_numbers
 
+
 def get_correct_form_of_word(bulls: int, cows: int) -> Tuple[str, str]:
     """
-    Vrátí správné gramatické tvary slov "bull" a "cow".
+    Returns the correct grammatical forms of the words "bull" and "cow".
 
     Args:
-        bulls (int): Počet "býků" (správná číslice na správné pozici).
-        cows (int): Počet "krav" (správná číslice na špatné pozici).
+        bulls (int): The number of "bulls" (correct digit 
+                     in the correct position).
+        cows (int): The number of "cows" (correct digit 
+                     in the wrong position).
 
     Returns:
-        Tuple[str, str]: Tuple se správnými tvary slov bull a cow.
+        Tuple[str, str]: A tuple with the correct forms 
+                         of the words "bull" and "cow".
     """
     bull_word = 'bull' if bulls == 1 else 'bulls'
     cow_word = 'cow' if cows == 1 else 'cows'
     return bull_word, cow_word
 
+
 def generate_numbers_for_guessing() -> List[int]:
     """
-    Vygeneruje náhodné 4místné tajné číslo pro hádání.
+    Generates a random 4-digit secret number to be guessed.
 
-    Číslo je sestaveno z unikátních číslic a nezačíná nulou.
+    The number is composed of unique digits and does not start with zero.
 
     Returns:
-        List[int]: Seznam čtyř unikátních celých čísel.
+        List[int]: A list of four unique integers.
     """
     digits = list(range(10))
     random.shuffle(digits)
-    # Zajistí, aby číslo nezačínalo nulou
+    # Ensures the number does not start with zero
     if digits[0] == 0:
         digits[0], digits[1] = digits[1], digits[0]
 
     secret_number = digits[:4]
     return secret_number
 
+
 def guessing_numbers(numbers_for_guessing: List[int]) -> int:
     """
-    Spustí hlavní herní smyčku, kde hráč hádá číslo.
+    Runs the main game loop where the player guesses the number.
 
-    Smyčka běží, dokud hráč neuhodne správné číslo (4 "býky").
-    V každém kole vyhodnotí hráčův tip, vypíše počet "býků" a "krav"
-    a počítá pokusy.
+    The loop runs until the player guesses the correct number (4 "bulls").
+    In each round, it evaluates the player's guess, prints the number
+    of "bulls" and "cows", and counts the attempts.
 
     Args:
-        numbers_for_guessing (List[int]): Seznam s tajným číslem k uhodnutí.
+        numbers_for_guessing (List[int]): The list containing
+        the secret number to be guessed.
 
     Returns:
-        int: Celkový počet pokusů, které hráč potřeboval.
+        int: The total number of attempts the player needed.
     """
     attempt = 0
     while True:
@@ -106,9 +113,10 @@ def guessing_numbers(numbers_for_guessing: List[int]) -> int:
         print(SEPARATOR_LINE)
     return attempt
 
+
 def introductory_information() -> None:
     """
-    Vypíše úvodní uvítací zprávu a instrukce ke hře.
+    Prints the introductory welcome message and game instructions.
     """
     print('\nHi there!')
     print(SEPARATOR_LINE)
@@ -118,29 +126,32 @@ def introductory_information() -> None:
     print('Enter a number:')
     print(SEPARATOR_LINE)
 
+
 def greeting(attempt: int) -> None:
     """
-    Vypíše závěrečnou gratulaci po uhodnutí čísla.
+    Prints the final congratulatory message after the number is guessed.
 
     Args:
-        attempt (int): Celkový počet pokusů potřebných k vítězství.
+        attempt (int): The total number of attempts needed to win.
     """
     print("Correct, you've guessed the right number")
     print(f'in {attempt} guesses!')
     print(SEPARATOR_LINE)
     print("That's amazing!\n")
 
+
 def main():
     """
-    Hlavní funkce, která řídí celý běh programu.
+    The main function that controls the entire program flow.
 
-    Postupně volá funkce pro zobrazení úvodu, generování čísla,
-    samotnou hru a závěrečnou gratulaci.
+    It sequentially calls functions to display the intro, generate the number,
+    run the game itself, and show the final greeting.
     """
     introductory_information()
     secret_number = generate_numbers_for_guessing()
     attempts_count = guessing_numbers(secret_number)
     greeting(attempts_count)
+
 
 if __name__ == '__main__':
     main()
